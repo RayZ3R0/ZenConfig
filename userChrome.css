@@ -1,0 +1,95 @@
+#pageAction-urlbar-_testpilot-containers, 
+#tracking-protection-icon-container,
+#star-button-box,
+#identity-box,
+#userContext-label,
+#zen-sidebar-splitter {
+  display: none !important;
+}
+
+
+
+/* Highlight urlbar when loading the page */
+#nav-bar {
+  #urlbar:not([breakout-extend="true"]) { /* Unless urlbar is opened */
+    #urlbar-background::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #ff6b6b66, #4ecdc466, #ff6b6b66);
+      background-size: 200% 100%;
+      animation: urlbar-loading-gradient 1s linear reverse infinite;
+      animation-play-state: paused;
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+  }
+
+  &:has(#reload-button[displaystop="true"]) { /* When 'Stop' button is shown isntead of 'Reload' */
+    #urlbar-background::before {
+      animation-play-state: running;
+      opacity: 1;
+    }
+  }  
+}
+
+@keyframes urlbar-loading-gradient {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+
+
+/* Integrated URL bar & webview*/ 
+#browser {
+  
+    &:not(:has(.zen-split-view-splitter)) {
+      --urlbar-min-height: 28px !important;
+
+      #nav-bar {
+        --zen-toolbar-height: 36px;
+
+        background-color:  var(--lwt-accent-color) !important;
+        border-radius: 20px 20px 0px 0px !important;
+        padding-left: 6px !important;
+        margin-top: 6px !important;
+        margin-left: 5.5px !important;
+        
+        
+
+        &:not([urlbar-exceeds-toolbar-bounds]) {
+          backdrop-filter: blur(10px) saturate(1.5);
+        }
+      }
+
+      .browserContainer {
+        border-radius: 0px 0px 15px 15px !important;
+      }
+    }
+  
+} 
+
+
+.browserSidebarContainer {
+  padding: 0px !important;
+  box-shadow: 0 0 0 0px transparent !important;
+  border-radius:  0px 0px 15px 15px !important;
+}
+
+#urlbar {
+        --toolbar-field-focus-border-color: transparent !important; /* Remove blue border */
+}
+
+
+tab.tabbrowser-tab > stack > hbox {
+    color: white !important;                  /* Force text color to white */
+}
+
+#tabs-newtab-button, #zen-current-workspace-indicator-name, #toolbarbutton-icontoolbarbutton-icon {
+  color: white !important;
+} 
+
+#zen-sidebar-splitter {
+  display: none !important;
+}
+
